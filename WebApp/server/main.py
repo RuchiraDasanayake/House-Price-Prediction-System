@@ -8,7 +8,7 @@ app = Flask(__name__)
 CORS(app)
 
 # Load the trained model from the pickle file
-model = joblib.load('Predict_ridge_new.pickle')
+model = joblib.load('Predict_ridge.pickle')
 
 # Define the /api/predict route for POST requests
 @app.route('/api/predict', methods=['POST'])

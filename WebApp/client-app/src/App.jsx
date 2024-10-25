@@ -30,10 +30,10 @@ function App() {
     },
     {
       title: "Size and Structure", fields: [
-        { label: "Total Square Footage (sq ft)", value: totalsf, setter: setTotalSF, type: "number" },
+        { label: "Total Building Area (sq ft)", value: totalsf, setter: setTotalSF, type: "number" },
         { label: "Total Porch Area (sq ft)", value: totalporchsf, setter: setTotalPorchSF, type: "number" },
-        { label: "Total Area (sq ft)", value: totalarea, setter: setTotalArea, type: "number" },
-        { label: "Overall Quality", value: OverallQual, setter: setOverallQual, type: "select", options: [{ value: "", label: "Select overall quality" }, { value: 10, label: "Very Excellent" }, { value: 9, label: "Excellent" }, { value: 8, label: "Very Good" }, { value: 7, label: "Good" }, { value: 6, label: "Above Average" }, { value: 5, label: "Average" }, { value: 4, label: "Below Average" }, { value: 3, label: "Fair" }, { value: 2, label: "Poor" }, { value: 1, label: "Very Poor" }] }
+        { label: "Living Area (sq ft)", value: totalarea, setter: setTotalArea, type: "number" },
+        { label: "Overall Quality", value: OverallQual, setter: setOverallQual, type: "select", options: [{ value: "", label: "Select overall quality (rate out of 10)" }, { value: 10, label: "Very Excellent" }, { value: 9, label: "Excellent" }, { value: 8, label: "Very Good" }, { value: 7, label: "Good" }, { value: 6, label: "Above Average" }, { value: 5, label: "Average" }, { value: 4, label: "Below Average" }, { value: 3, label: "Fair" }, { value: 2, label: "Poor" }, { value: 1, label: "Very Poor" }] }
       ]
     },
     {
@@ -42,7 +42,12 @@ function App() {
         { label: "Total Bedrooms", value: BedroomAbvGr, setter: setBedroomAbvGr, type: "number" },
         { label: "Total Kitchens", value: KitchenAbvGr, setter: setKitchenAbvGr, type: "number" },
         { label: "Total Rooms", value: TotRmsAbvGrd, setter: setTotRmsAbvGrd, type: "number" },
-        { label: "Number of Fireplaces", value: Fireplaces, setter: setFireplaces, type: "number" }
+        {
+          label: "Number of Fireplaces",
+          value: Fireplaces,
+          setter: (value) => setFireplaces(value >= 0 ? value : ''), // Ensure no negative values
+          type: "number"
+        }
       ]
     },
     {
@@ -144,7 +149,7 @@ function App() {
         <div className="container">
           {/* Title */}
           <div className="text-center text-white mb-5">
-            <h1 className="display-4" style={{ fontFamily: 'Georgia, serif', fontSize: '3rem', fontWeight: 'bold', letterSpacing: '1px', textTransform: 'capitalize' }}>
+            <h1 className="display-4" style={{ fontFamily: 'Georgia, serif', fontSize: '3rem', fontWeight: 'bold', letterSpacing: '1px', textTransform: 'capitalize', paddingTop: '15px'}}>
               House Price Prediction
             </h1>
             <p className="lead">Enter the details below to predict the house price</p>
